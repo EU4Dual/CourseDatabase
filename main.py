@@ -1,16 +1,31 @@
-# This is a sample Python script.
+import psycopg2
 
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Connection parameters
+database = "moduledb"
+user = "postgres"
+password = "postgres"
+host = "localhost"  # or "127.0.0.1"
+port = 5432  # or the local port used in the SSH tunnel
 
+# Establish the connection
+conn = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
+# Open a cursor to perform database operations
+cur = conn.cursor()
 
+# Execute a test query
+cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Retrieve query results
+records = cur.fetchall()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Check if there are any tables
+if not records:
+    print("No tables found in the database.")
+else:
+    print("Tables in the database:")
+    for table in records:
+        print(table[0])
+
+# # Finally, you may print the output to the console or use it anyway you like
+# print(records)
