@@ -1,23 +1,31 @@
+import configparser
 import psycopg2
+import openpyxl
 
-# Connection parameters
-database = "moduledb"
-user = "postgres"
-password = "postgres"
-host = "localhost"  # or "127.0.0.1"
-port = 5432  # or the local port used in the SSH tunnel
+# Create a ConfigParser object
+config = configparser.ConfigParser()
+
+# Read the file using the object
+config.read('config.ini')
+
+# Obtain the configuration values
+database = config.get('database', 'database')
+user = config.get('database', 'user')
+password = config.get('database', 'password')
+host = config.get('database', 'host')
+port = config.get('database', 'port')
 
 # Establish the connection
-conn = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
+connection = psycopg2.connect(database=database, user=user, password=password, host=host, port=port)
 
 # Open a cursor to perform database operations
-cur = conn.cursor()
+cursor = connection.cursor()
 
 # Execute a test query
-cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
+cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
 
 # Retrieve query results
-records = cur.fetchall()
+records = cursor.fetchall()
 
 # Check if there are any tables
 if not records:
