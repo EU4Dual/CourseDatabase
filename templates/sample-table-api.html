@@ -1,0 +1,50 @@
+<!-- sample-table-api.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Table</title>
+</head>
+<body>
+    <h2>Display data from API</h2>
+    <div id="data-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch data from the API endpoint
+            fetch('/getAllData')
+                .then(response => response.json())
+                .then(data => {
+                    // Process and display the data in the UI
+                    const dataContainer = document.getElementById('data-container');
+                    if (dataContainer) {
+                        if (dataContainer) {
+                            const table = $('<table>').appendTo(dataContainer);
+                            const thead = $('<thead>').appendTo(table);
+                            const tbody = $('<tbody>').appendTo(table);
+
+                            // Create table headers
+                            const headers = Object.keys(data[0]);
+                            const headerRow = $('<tr>').appendTo(thead);
+                            headers.forEach(header => $('<th>').text(header).appendTo(headerRow));
+
+                            // Create table rows
+                            data.forEach(item => {
+                                const row = $('<tr>').appendTo(tbody);
+                                headers.forEach(header => $('<td>').text(item[header]).appendTo(row));
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+
+    </script>
+</body>
+</html>
