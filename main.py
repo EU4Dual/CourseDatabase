@@ -1,6 +1,9 @@
+from flask import Flask, render_template, jsonify
 import configparser
 import psycopg2
-import openpyxl
+
+app = Flask(__name__)
+app.json.sort_keys = False
 
 # Create a ConfigParser object
 config = configparser.ConfigParser()
@@ -22,18 +25,35 @@ connection = psycopg2.connect(database=database, user=user, password=password, h
 cursor = connection.cursor()
 
 # Execute a test query
-cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
+cursor.execute("SELECT * FROM campus;")
+# cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
 
 # Retrieve query results
 records = cursor.fetchall()
 
-# Check if there are any tables
-if not records:
-    print("No tables found in the database.")
-else:
-    print("Tables in the database:")
-    for table in records:
-        print(table[0])
 
-# # Finally, you may print the output to the console or use it anyway you like
-# print(records)
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
+
+@app.route('/sample-table')
+def index():
+    return render_template('sample-table-api.html')
+
+
+@app.route('/getAllData', methods=['GET'])
+def getAllData():
+    # Get column names from cursor description
+    column_names = [desc[0] for desc in cursor.description]
+
+    # Build a list of dictionaries with column headers and values
+    result_data = []
+    for row in records:
+        result_data.append(dict(zip(column_names, row)))
+
+    return jsonify(result_data)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

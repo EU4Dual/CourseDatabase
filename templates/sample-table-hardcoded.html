@@ -1,0 +1,120 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Table</title>
+</head>
+<body>
+    <h2>Display data from API</h2>
+    <div id="data-container"></div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hardcoded JSON data 
+            const hardcodedData = [
+                {
+                    "id": 1,
+                    "name": "DHBW Heidenheim",
+                    "address": "Marienstraße 20, 89518 Heidenheim",
+                    "phone": "+49 (0)7321 / 2722-0",
+                    "website": "https://www.heidenheim.dhbw.de/"
+                },
+                {
+                    "id": 2,
+                    "name": "DHBW Heilbronn",
+                    "address": "Bildungscampus 4, 74076 Heilbronn",
+                    "phone": "+49 (0)7131 / 1237-0",
+                    "website": "https://www.heilbronn.dhbw.de/"
+                },
+                {
+                    "id": 3,
+                    "name": "DHBW Center for Advanced Studies (DHBW CAS)",
+                    "address": "Bildungscampus 13, 74076 Heilbronn",
+                    "phone": "+49 (0)7131 / 3898-0",
+                    "website": "https://www.cas.dhbw.de/"
+                },
+                {
+                    "id": 4,
+                    "name": "DHBW Karlsruhe",
+                    "address": "Erzbergerstraße 121, 76133 Karlsruhe",
+                    "phone": "+49 (0)721 / 9735-5",
+                    "website": "https://www.karlsruhe.dhbw.de/"
+                },
+                {
+                    "id": 5,
+                    "name": "DHBW Lörrach",
+                    "address": "Hangstraße 46-50, 79539 Lörrach",
+                    "phone": "+49 (0)7621 / 2071-0",
+                    "website": "https://dhbw-loerrach.de/"
+                },
+                {
+                    "id": 6,
+                    "name": "DHBW Mannheim",
+                    "address": "Coblitzallee 1-9, 68163 Mannheim",
+                    "phone": "+49 (0)621 / 4105-0",
+                    "website": "https://www.mannheim.dhbw.de/"
+                },
+                {
+                    "id": 7,
+                    "name": "DHBW Mosbach",
+                    "address": "Lohrtalweg 10, 74821 Mosbach",
+                    "phone": "+49 (0)6261 / 939-0",
+                    "website": "https://www.mosbach.dhbw.de/"
+                },
+                {
+                    "id": 8,
+                    "name": "DHBW Mosbach / Bad Mergentheim",
+                    "address": "Schloss 2, 97980 Bad Mergentheim",
+                    "phone": "+49 (0)7931 / 530-600",
+                    "website": "https://www.mosbach.dhbw.de/bad-mergentheim/"
+                },
+                {
+                    "id": 9,
+                    "name": "DHBW Ravensburg",
+                    "address": "Marienplatz 2, 88212 Ravensburg",
+                    "phone": "+49 (0)751 / 18999-2700",
+                    "website": "https://www.ravensburg.dhbw.de/"
+                },
+                {
+                    "id": 10,
+                    "name": "DHBW Ravensburg / Friedrichshafen",
+                    "address": "Fallenbrunnen 2, 88045 Friedrichshafen",
+                    "phone": "+49 (0)7541 / 2077-0",
+                    "website": "https://www.ravensburg.dhbw.de/"
+                },
+                {
+                    "id": 11,
+                    "name": "DHBW Stuttgart",
+                    "address": "Rotebühlstraße 133, 70197 Stuttgart",
+                    "phone": "-",
+                    "website": "https://www.dhbw-stuttgart.de/"
+                },
+                {
+                    "id": 12,
+                    "name": "DHBW Stuttgart / Horb",
+                    "address": "Florianstraße 15, 72160 Horb",
+                    "phone": "+49 (0)7451 / 521-0",
+                    "website": "https://www.dhbw-stuttgart.de/horb/"
+                },
+                {
+                    "id": 13,
+                    "name": "DHBW Villingen-Schwenningen",
+                    "address": "Friedrich-Ebert-Straße 30, 78054 Villingen-Schwenningen",
+                    "phone": "+49 (0)7720 / 3906-0",
+                    "website": "https://www.dhbw-vs.de/"
+                }
+            ];
+
+            // Process and display the data in the UI
+            // Replace with your own code here!!
+            const dataContainer = document.getElementById('data-container');
+            if (dataContainer) {
+                dataContainer.textContent = JSON.stringify(hardcodedData, null, 2);
+            }
+        });
+    </script>
+</body>
+</html>

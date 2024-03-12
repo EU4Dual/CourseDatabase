@@ -1,1 +1,1 @@
-# ModuleDatabase
+# CourseDatabase
